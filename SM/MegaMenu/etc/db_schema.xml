@@ -1,0 +1,55 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mega_menu">
+        <column xsi:type="int" name="menu_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="varchar" name="name" length="50" nullable="false"/>
+        <column xsi:type="varchar" name="alias" length="50" nullable="false"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false"
+                default="1"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="menu_id"/>
+        </constraint>
+    </table>
+    <table name="mega_menu_item">
+        <column xsi:type="int" name="menu_item_id" padding="10" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="smallint" name="status" padding="6" unsigned="false" nullable="false" identity="false"
+                default="1"/>
+        <column xsi:type="int" name="parent_id" padding="10" unsigned="true" nullable="false"/>
+        <column xsi:type="int" name="menu_id" padding="10" unsigned="true" nullable="false"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false"/>
+        <column xsi:type="int" name="sub_width" padding="10" unsigned="true" nullable="true"/>
+        <column xsi:type="varchar" name="sub_menu_type" length="255" nullable="true"/>
+        <column xsi:type="varchar" name="link" length="255" nullable="true"/>
+        <column xsi:type="varchar" name="category" length="255" nullable="true"/>
+        <column xsi:type="text" name="show_header" nullable="true"/>
+        <column xsi:type="int" name="width_left" padding="10" unsigned="true" nullable="true" default="0"/>
+        <column xsi:type="text" name="show_left" nullable="true"/>
+        <column xsi:type="int" name="width_content" padding="10" unsigned="true" nullable="true" default="0"/>
+        <column xsi:type="text" name="show_content" nullable="true"/>
+        <column xsi:type="int" name="width_right" padding="10" unsigned="true" nullable="true" default="0"/>
+        <column xsi:type="text" name="show_right" nullable="true"/>
+        <column xsi:type="text" name="show_footer" nullable="true"/>
+        <column xsi:type="varchar" name="image" length="255" nullable="true"/>
+        <column xsi:type="int" name="width_image" padding="10" unsigned="true" nullable="true"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="menu_item_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_MEGA_MENU"
+                    table="mega_menu_item" column="menu_id" referenceTable="mega_menu"
+                    referenceColumn="menu_id" onDelete="CASCADE"/>
+    </table>
+    <table name="mega_menu_store">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"/>
+        <column xsi:type="int" name="menu_id" padding="10" unsigned="true" nullable="false"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="FK_MEGA_MENU"
+                    table="mega_menu_store" column="menu_id" referenceTable="mega_menu"
+                    referenceColumn="menu_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="FK_STORE"
+                    table="mega_menu_store" column="store_id" referenceTable="store"
+                    referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+</schema>

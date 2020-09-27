@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SM_MegaMenu::mega_menu" title="Mega Menu" module="SM_MegaMenu" sortOrder="10" resource="SM_MegaMenu::mega_menu"/>
+        <add id="SM_MegaMenu::menu" title="Menu" module="SM_MegaMenu" sortOrder="2" action="mega/menu/index" resource="SM_HelloWorld::menu" parent="SM_MegaMenu::mega_menu"/>
+        <add id="SM_MegaMenu::menu_item" title="Menu Item" module="SM_MegaMenu" sortOrder="2" action="mega/menuitem/index" resource="SM_HelloWorld::menu_item" parent="SM_MegaMenu::mega_menu"/>
+<!--        <add id="SM_MegaMenu::configuration" title="Configuration" module="SM_MegaMenu" sortOrder="3" action="mega/configuration/index" resource="SM_MegaMenu::configuration" parent="SM_MegaMenu::mega_menu"/>-->
+    </menu>
+</config>

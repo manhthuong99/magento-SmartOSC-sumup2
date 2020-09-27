@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">menu_item_form.block_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="SM\MegaMenu\Block\Adminhtml\MenuItem\Edit\SaveButton"/>
+            <button name="delete" class="SM\MegaMenu\Block\Adminhtml\MenuItem\Edit\DeleteButton"/>
+            <button name="back" class="SM\MegaMenu\Block\Adminhtml\MenuItem\Edit\BackButton"/>
+        </buttons>
+        <namespace>menu_item_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>menu_item_form.menu_item_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="menu_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="mega/menuitem/save"/>
+        </settings>
+        <dataProvider class="SM\MegaMenu\Model\MenuItem\DataProvider" name="menu_item_data_source">
+            <settings>
+                <requestFieldName>menu_item_id</requestFieldName>
+                <primaryFieldName>menu_item_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">MEGA MENU</label>
+        </settings>
+        <fieldset>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string" translate="true">General Information</item>
+                    <item name="collapsible" xsi:type="boolean">true</item>
+                    <item name="opened" xsi:type="boolean">true</item>
+                </item>
+            </argument>
+            <field name="menu_item_id" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">mega_menu_item</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>false</visible>
+                    <dataScope>menu_item_id</dataScope>
+                </settings>
+            </field>
+            <field name="status" sortOrder="10" formElement="checkbox">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">mega_menu_item</item>
+                        <item name="default" xsi:type="number">1</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>boolean</dataType>
+                    <label translate="true">Enable</label>
+                    <dataScope>status</dataScope>
+                </settings>
+                <formElements>
+                    <checkbox>
+                        <settings>
+                            <valueMap>
+                                <map name="false" xsi:type="number">0</map>
+                                <map name="true" xsi:type="number">1</map>
+                            </valueMap>
+                            <prefer>toggle</prefer>
+                        </settings>
+                    </checkbox>
+                </formElements>
+            </field>
+            <field name="name" sortOrder="20" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">mega_menu_item</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-entry" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label translate="true">Name</label>
+                    <dataScope>name</dataScope>
+                </settings>
+            </field>
+            <field name="menu_id">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">SM\MegaMenu\Model\Source\ParentMenu</item>
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">mega_menu_item</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" translate="true" xsi:type="string">Menu</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="category">
+                <argument name="data" xsi:type="array">
+                    <item name="options" xsi:type="object">SM\MegaMenu\Model\Source\CategoryList</item>
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">category</item>
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="label" translate="true" xsi:type="string">Category</item>
+                        <item name="formElement" xsi:type="string">select</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="sub_menu_type" formElement="select">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="dataType" xsi:type="string">number</item>
+                        <item name="component" xsi:type="string">SM_MegaMenu/js/form/element/options</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Child Menu Type</label>
+                    <dataScope>sub_menu_type</dataScope>
+                </settings>
+                <formElements>
+                    <select>
+                        <settings>
+                            <options>
+                                <option name="1" xsi:type="array">
+                                    <item name="value" xsi:type="string">0</item>
+                                    <item name="label" xsi:type="string">Child menu item</item>
+                                </option>
+                                <option name="2" xsi:type="array">
+                                    <item name="value" xsi:type="string">1</item>
+                                    <item name="label" xsi:type="string">Static block</item>
+                                </option>
+                                <option name="3" xsi:type="array">
+                                    <item name="value" xsi:type="string">2</item>
+                                    <item name="label" xsi:type="string">Image</item>
+                                </option>
+                            </options>
+                        </settings>
+                    </select>
+                </formElements>
+            </field>
+<!--            <field name="image">-->
+<!--                <argument name="data" xsi:type="array">-->
+<!--                    <item name="config" xsi:type="array">-->
+<!--                        <item name="source" xsi:type="string">image</item>-->
+<!--                        <item name="label" xsi:type="string" translate="true">Image</item>-->
+<!--                        <item name="formElement" xsi:type="string">fileUploader</item>-->
+<!--                        <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>-->
+<!--                        <item name="previewTmpl" xsi:type="string">Magento_Catalog/image-preview</item>-->
+<!--                        <item name="dataScope" xsi:type="string">image</item>-->
+<!--                        <item name="visible" xsi:type="boolean">false</item>-->
+<!--                        <item name="uploaderConfig" xsi:type="array">-->
+<!--                            <item name="url" xsi:type="url" path="mega/menuitem/upload"/>-->
+<!--                        </item>-->
+<!--                    </item>-->
+<!--                </argument>-->
+<!--            </field>-->
+            <field name="image" formElement="imageUploader">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">image</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="dataScope" xsi:type="string">image</item>
+                    </item>
+                </argument>
+                <settings>
+                    <notice translate="true">Some notice.</notice>
+                    <label translate="true">Image Uploader Example</label>
+                    <componentType>imageUploader</componentType>
+                </settings>
+                <formElements>
+                    <imageUploader>
+                        <settings>
+                            <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                            <maxFileSize>2097152</maxFileSize>
+                            <uploaderConfig>
+                                <param xsi:type="string" name="url">mega/menuitem/upload</param>
+                            </uploaderConfig>
+                        </settings>
+                    </imageUploader>
+                </formElements>
+            </field>
+            <field name="width_image" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">width_image</item>
+                        <item name="default" xsi:type="number">500</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-number" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Width (px)</label>
+                    <dataScope>width_image</dataScope>
+                </settings>
+            </field>
+            <field name="show_header">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="source" xsi:type="string">show_header</item>
+                        <item name="label" xsi:type="string">Header HTML</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">show_header</item>
+                        <item name="rows" xsi:type="number">4</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="width_left" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">width_left</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-number" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Width-Left (px)</label>
+                    <dataScope>width_left</dataScope>
+                </settings>
+            </field>
+            <field name="show_left">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="source" xsi:type="string">show_left</item>
+                        <item name="label" xsi:type="string">Left HTML</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">show_left</item>
+                        <item name="rows" xsi:type="number">4</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="width_content" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">width_content</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-number" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Width-Content (px)</label>
+                    <dataScope>width_content</dataScope>
+                </settings>
+            </field>
+            <field name="show_content">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="source" xsi:type="string">show_content</item>
+                        <item name="label" xsi:type="string">Content HTML</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">show_content</item>
+                        <item name="rows" xsi:type="number">4</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="width_right" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="source" xsi:type="string">width_right</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                        <item name="default" xsi:type="number">0</item>
+                        <item name="validation" xsi:type="array">
+                            <item name="validate-number" xsi:type="boolean">true</item>
+                        </item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label translate="true">Width-Right (px)</label>
+                    <dataScope>width_right</dataScope>
+                </settings>
+            </field>
+            <field name="show_right">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="source" xsi:type="string">show_right</item>
+                        <item name="label" xsi:type="string">Right HTML</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">show_right</item>
+                        <item name="rows" xsi:type="number">4</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+            </field>
+            <field name="show_footer">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="dataType" xsi:type="string">text</item>
+                        <item name="formElement" xsi:type="string">wysiwyg</item>
+                        <item name="source" xsi:type="string">show_footer</item>
+                        <item name="label" xsi:type="string">Footer HTML</item>
+                        <item name="template" xsi:type="string">ui/form/field</item>
+                        <item name="wysiwyg" xsi:type="boolean">true</item>
+                        <item name="collapsible" xsi:type="boolean">true</item>
+                        <item name="dataScope" xsi:type="string">show_footer</item>
+                        <item name="rows" xsi:type="number">4</item>
+                        <item name="visible" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+            </field>
+        </fieldset>
+    </fieldset>
+</form>

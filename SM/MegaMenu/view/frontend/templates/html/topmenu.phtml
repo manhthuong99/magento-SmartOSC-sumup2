@@ -1,0 +1,45 @@
+<div id='cssmenu'>
+    <ul>
+        <li><a href='#'><span>Home</span></a></li>
+        <?php foreach ($block->getMenuItem() as $item):
+            if ($item['sub_menu_type'] == 0) {
+                ?>
+                <li class='active has-sub'><a href='<?= $item['link'] ?>'><span><?= $item['name'] ?></span></a>
+                    <?= $block->getChildMenu($item['category']) ?>
+                </li>
+            <?php } ?>
+            <?php if ($item['sub_menu_type'] == 1) { ?>
+            <li class='has-sub'><a href='<?= $item['link'] ?>'><?= $item['name'] ?></a>
+                <ul style="width: <?= $item['sub_width'] ?>px">
+                    <li>
+                        <div class="header-menu" style="width: <?= $item['sub_width'] ?>px">
+                            <?= $item['show_header'] ?>
+                        </div>
+                        <div class="left-menu" style="width: <?= $item['width_left'] ?>px">
+                            <?= $item['show_left'] ?>
+                        </div>
+                        <div class="content-menu" style="width: <?= $item['width_content'] ?>px">
+                            <?= $item['show_content'] ?>
+                        </div>
+                        <div class="right-menu" style="width: <?= $item['width_right'] ?>px">
+                            <?= $item['show_right'] ?>
+                        </div>
+                        <div class="footer-menu" style="width: <?= $item['sub_width'] ?>px">
+                            <?= $item['show_footer'] ?>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        <?php } ?>
+            <?php if ($item['sub_menu_type'] == 2) { ?>
+            <li class='has-sub'><a href='<?= $item['link'] ?>'><?= $item['name'] ?></a>
+                <ul style="width: <?= $item['width_image'] ?>px">
+                    <li>
+                        <img src="<?= $item['image'] ?>" alt="" >
+                    </li>
+                </ul>
+            </li>
+        <?php } ?>
+        <?php endforeach; ?>
+    </ul>
+</div>
